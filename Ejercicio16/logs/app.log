@@ -1,0 +1,41 @@
+2026-01-27 20:47:41 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-01-27 20:47:41 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2250b9f2
+2026-01-27 20:47:41 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-01-27 20:47:41 ERROR DaoSqlimpl - Error al insertar alumno con NIA=1
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'alumnos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.insertoAlumno(DaoSqlimpl.java:64) [classes/:?]
+	at Main.Menu.InsertoAlumnoSql(Menu.java:101) [classes/:?]
+	at Main.Menu.insertoAlumno(Menu.java:96) [classes/:?]
+	at Main.Menu.init(Menu.java:34) [classes/:?]
+	at Main.App.main(App.java:6) [classes/:?]
+2026-01-27 20:47:48 INFO  DaoSqlimpl - Alumno con NIA=1 insertado correctamente
+2026-01-27 20:51:52 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-01-27 20:51:52 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-01-27 20:51:52 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-01-27 20:51:53 INFO  DaoSqlimpl - Alumno con NIA=1 insertado correctamente en el grupo con Id=1
+2026-01-27 20:51:53 ERROR DaoSqlimpl - Error al insertar alumno con NIA=1 en grupo con Id=1
+2026-01-27 20:56:28 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-01-27 20:56:28 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-01-27 20:56:28 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-01-27 20:56:28 INFO  DaoSqlimpl - Alumno con NIA=1 insertado correctamente en el grupo con Id=1
+2026-01-27 20:58:48 ERROR DaoSqlimpl - Error obteniendo grupos con alumnos
+java.sql.SQLSyntaxErrorException: Unknown column 'a.FechaNacimiento' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:968) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.obtenerGruposConAlumnos(DaoSqlimpl.java:192) [classes/:?]
+	at Main.Menu.exportoAJson(Menu.java:235) [classes/:?]
+	at Main.Menu.init(Menu.java:42) [classes/:?]
+	at Main.App.main(App.java:6) [classes/:?]
