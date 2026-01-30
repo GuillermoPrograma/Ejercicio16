@@ -1,59 +1,25 @@
-package Main;
+package Grafica;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import Dao.Dao;
 import Dao.DaoBinarioimpl;
 import Dao.DaoJsonimpl;
 import Dao.DaoSqlimpl;
+import Main.Alumno;
+import Main.Grupo;
 
-public class Menu {
+public class VistaControlador implements InterfazGrafica {
 
-	private DaoSqlimpl daoSql;
-	private DaoBinarioimpl daoBinario;
-	private DaoJsonimpl daoJson;
+	
 	private Scanner entrada = new Scanner(System.in);
-
-	public void init() {
-		// Inicializamos los DAOs una sola vez al arrancar
-		daoSql = DaoSqlimpl.getInstance();
-		daoBinario = DaoBinarioimpl.getInstance();
-		daoJson = DaoJsonimpl.getInstance();
-
-		int opcion;
-		do {
-			menu(); 
-			if (entrada.hasNextInt()) {
-				opcion = entrada.nextInt();
-				entrada.nextLine(); // Limpiar buffer
-
-				switch (opcion) {
-				case 1: insertoAlumno(); break;
-				case 2: insertoGrupo(); break;
-				case 3: añadoAlumnoAGrupo(); break; // NUEVA OPCIÓN
-				case 4: MuestroAlumnos(); break;
-				case 5: guardarFichero(); break;
-				case 6: mostrarFichero(); break;
-				case 7: modificoAlumnoId(); break;
-				case 8: eliminoAlumnoId(); break;
-				case 9: eliminoAlumnoApellidos(); break;
-				case 10: exportoAJson(); break;
-				case 11: importoDesdeJson(); break;
-				case 12: MuestroAlumnoPorNia(); break;
-				case 0: System.out.println("\nSaliendo del programa...\n"); break;
-				default: System.err.println("\nNúmero no válido");
-				}
-			} else {
-				System.err.println("Por favor, introduce un número.");
-				entrada.nextLine();
-				opcion = -1;
-			}
-		} while (opcion != 0);
-	}
-
-	public void menu() {
+	
+	public VistaControlador() {}
+	
+	public int mostrarMenu() { //se llama todo desde el controlador do while en el controlador
 		System.out.println("\n===== GESTIÓN DE ALUMNOS Y GRUPOS =====");
 		System.out.println("1. Insertar alumno");
 		System.out.println("2. Insertar grupo");
@@ -68,7 +34,67 @@ public class Menu {
 		System.out.println("11. Importar grupos desde JSON  a BD");
 		System.out.println("0. Salir");
 		System.out.print("Seleccione una opción: ");
+		
+		
+		if (entrada.hasNextInt()) {
+            int op = entrada.nextInt();
+            entrada.nextLine();
+            return op;
+        }
+		entrada.nextLine();
+        return -1;
 	}
+	
+	
+	public void añadoAlumnoAGrupo() {
+		System.out.println("Dime el nia de alumno");
+		int nia = entrada.nextInt();
+		System.out.println("dime el id del grupo");
+		int id = entrada.nextInt();
+		
+		int resultado = daoSql.añadoAlumnoAGrupo(nia, id);
+		if (resultado >= 1) 
+		{
+			System.out.println("resultado con exito");
+		}
+		else 
+		{
+			System.out.println("revisar log");
+		}
+		}
+
+		public Alumno insertoAlumno() {
+			System.out.println("--- Inserción de Alumno ---");
+			System.out.print("NIA: ");
+			int nia = entrada.nextInt();
+			entrada.nextLine();
+
+			System.out.print("Nombre: ");
+			String nombre = entrada.nextLine();
+
+			System.out.print("Apellidos: ");
+			String apellidos = entrada.nextLine();
+
+			System.out.print("Fecha nacimiento (yyyy-mm-dd): ");
+			LocalDate fechaNacimiento = LocalDate.parse(entrada.nextLine());
+
+			System.out.print("Género (M/F/N): ");
+			char genero = entrada.next().toUpperCase().charAt(0);
+			entrada.nextLine();
+
+			System.out.print("Ciclo: ");
+			String ciclo = entrada.nextLine();
+
+			System.out.print("Curso: ");
+			String curso = entrada.nextLine();
+
+			Alumno a = new Alumno(nia, nombre, apellidos, genero, fechaNacimiento, ciclo, curso);
+			return a;
+		}
+		
+		public void mostrarMensaje(String msg) {
+	        System.out.println(msg);
+	    }
 
 	public void MuestroAlumnoPorNia() 
 	{
@@ -81,51 +107,7 @@ public class Menu {
 	{
 		System.out.println(daoSql.muestroNiayNombres());
 	}
-	public void añadoAlumnoAGrupo() {
-	System.out.println("Dime el nia de alumno");
-	int nia = entrada.nextInt();
-	System.out.println("dime el id del grupo");
-	int id = entrada.nextInt();
 	
-	int resultado = daoSql.añadoAlumnoAGrupo(nia, id);
-	if (resultado >= 1) 
-	{
-		System.out.println("resultado con exito");
-	}
-	else 
-	{
-		System.out.println("revisar log");
-	}
-	}
-
-	public void insertoAlumno() {
-		System.out.println("--- Inserción de Alumno ---");
-		System.out.print("NIA: ");
-		int nia = entrada.nextInt();
-		entrada.nextLine();
-
-		System.out.print("Nombre: ");
-		String nombre = entrada.nextLine();
-
-		System.out.print("Apellidos: ");
-		String apellidos = entrada.nextLine();
-
-		System.out.print("Fecha nacimiento (yyyy-mm-dd): ");
-		LocalDate fechaNacimiento = LocalDate.parse(entrada.nextLine());
-
-		System.out.print("Género (M/F/N): ");
-		char genero = entrada.next().toUpperCase().charAt(0);
-		entrada.nextLine();
-
-		System.out.print("Ciclo: ");
-		String ciclo = entrada.nextLine();
-
-		System.out.print("Curso: ");
-		String curso = entrada.nextLine();
-
-		Alumno a = new Alumno(nia, nombre, apellidos, genero, fechaNacimiento, ciclo, curso);
-		InsertoAlumnoSql(a);
-	}
 
 	private void InsertoAlumnoSql(Alumno a) {
 		daoSql.insertoAlumno(a);

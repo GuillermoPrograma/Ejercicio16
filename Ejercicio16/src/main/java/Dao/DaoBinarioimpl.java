@@ -17,20 +17,10 @@ import Main.Alumno;
 import Main.Grupo;
 
 public class DaoBinarioimpl implements Dao {
-	private static DaoBinarioimpl instance;
-	
-	static 
-	{
-		instance = new DaoBinarioimpl();
-	}
-	
-	private DaoBinarioimpl() {}
 	
 	
-	public static DaoBinarioimpl getInstance() {
-		return instance;
-	}
-
+	public DaoBinarioimpl() {}
+	
 
 	static String ruta = "alumnosEjercicio15.dat";
 

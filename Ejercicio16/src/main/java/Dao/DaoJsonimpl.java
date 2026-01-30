@@ -19,18 +19,12 @@ import Main.Grupo;
 
 public class DaoJsonimpl implements Dao {
 
-	private static DaoJsonimpl instance;
+	
 
-	static {
-		instance = new DaoJsonimpl();
-	}
-
-	private DaoJsonimpl() {
+	public DaoJsonimpl() {
 	};
 
-	public static DaoJsonimpl getInstance() {
-		return instance;
-	}
+	
 
 	@Override
 	public int insertoAlumno(Alumno a) {

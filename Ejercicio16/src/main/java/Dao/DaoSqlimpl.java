@@ -22,21 +22,10 @@ import pool.MyDataSource;
 public class DaoSqlimpl implements Dao {
 
 	private static final Logger log = LoggerFactory.getLogger(DaoSqlimpl.class); // pruebo a hacer un log para todo sql
-	private static DaoSqlimpl instance;
-	
-	static 
-	{
-		instance = new DaoSqlimpl();
-	}
-	
-	private DaoSqlimpl() {}
 	
 	
+	public DaoSqlimpl() {}
 	
-	public static DaoSqlimpl getInstance() {
-		return instance;
-	}
-
 
 
 	@Override
