@@ -19,7 +19,39 @@ public class VistaControlador implements InterfazGrafica {
 	
 	public VistaControlador() {}
 	
-	public int mostrarMenu() { //se llama todo desde el controlador do while en el controlador
+	public void init() {
+		int opcion;
+		do {
+			mostrarMenu(); 
+			if (entrada.hasNextInt()) {
+				opcion = entrada.nextInt();
+				entrada.nextLine(); // Limpiar buffer
+
+				switch (opcion) {
+				case 1: insertoAlumno(); break;
+				case 2: insertoGrupo(); break;
+				case 3: añadoAlumnoAGrupo(); break; // NUEVA OPCIÓN
+				case 4: MuestroAlumnos(); break;
+				case 5: guardarFichero(); break;
+				case 6: mostrarFichero(); break;
+				case 7: modificoAlumnoId(); break;
+				case 8: eliminoAlumnoId(); break;
+				case 9: eliminoAlumnoApellidos(); break;
+				case 10: exportoAJson(); break;
+				case 11: importoDesdeJson(); break;
+				case 0: System.out.println("\nSaliendo del programa...\n"); break;
+				default: System.err.println("\nNúmero no válido");
+				}
+			} else {
+				System.err.println("Por favor, introduce un número.");
+				entrada.nextLine();
+				opcion = -1;
+			}
+		} while (opcion != 0);
+	}
+	
+	public void mostrarMenu() {
+		
 		System.out.println("\n===== GESTIÓN DE ALUMNOS Y GRUPOS =====");
 		System.out.println("1. Insertar alumno");
 		System.out.println("2. Insertar grupo");
@@ -35,14 +67,6 @@ public class VistaControlador implements InterfazGrafica {
 		System.out.println("0. Salir");
 		System.out.print("Seleccione una opción: ");
 		
-		
-		if (entrada.hasNextInt()) {
-            int op = entrada.nextInt();
-            entrada.nextLine();
-            return op;
-        }
-		entrada.nextLine();
-        return -1;
 	}
 	
 	
@@ -239,4 +263,6 @@ public class VistaControlador implements InterfazGrafica {
 		}
 		System.out.println("Importados " + cont + " alumnos.");
 	}
+
+	
 }
