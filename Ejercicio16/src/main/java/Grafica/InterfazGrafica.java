@@ -1,5 +1,19 @@
 package Grafica;
 
+import java.util.List;
+
+import Main.Alumno;
+import Main.Grupo;
+
 public interface InterfazGrafica {
-	void mostrarMenu(); 
+	int mostrarMenu(); 
+	void mostrarMensaje(String msg);
+	
+	 Alumno guardoAlumnoGrafica();
+	 Grupo guardoGrupoGrafica();
+	 int[] añadoAlumnoAGrupoGrafica();
+	 public void muestroAlumnosGrafica(List<Alumno> alumnos);
+	 String[] modificarAlumnoIdGrafica();
+	 int eliminarAlumnoPorNia();
+	 String eliminarAlumnoPorApellido();
 }

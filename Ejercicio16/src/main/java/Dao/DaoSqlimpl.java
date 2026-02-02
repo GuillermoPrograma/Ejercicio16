@@ -29,7 +29,7 @@ public class DaoSqlimpl implements Dao {
 
 
 	@Override
-	public int insertoAlumno(Alumno al) {
+	public int guardarAlumnoBd(Alumno al) {
 	    // Ajustado: fecha_nacimiento e id_grupo
 	    String sql = "INSERT INTO alumnos(nia, nombre, apellidos, genero, fecha_nacimiento, ciclo, curso, id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -59,7 +59,7 @@ public class DaoSqlimpl implements Dao {
 
 
 	@Override
-	public int insertoGrupo(Grupo g) {
+	public int guardarGrupo(Grupo g) {
 		int result = -1;
 		String sql = "INSERT INTO grupos VALUES(?, ?)";
 		try (Connection conexion = MyDataSource.getConnection();
@@ -77,7 +77,7 @@ public class DaoSqlimpl implements Dao {
 	}
 
 	@Override
-	public int eliminoAlumnoPorApellido(String apellido) {
+	public int eliminarAlumnoPorApellido(String apellido) {
 		String sql = "Delete from alumnos where Apellidos Like ?";
 		int result = -1;
 		try (Connection conexion = MyDataSource.getConnection();
@@ -95,7 +95,7 @@ public class DaoSqlimpl implements Dao {
 	}
 
 	@Override
-	public int eliminoAlumnoPorNia(int nia) {
+	public int eliminarAlumnoPorNia(int nia) {
 		String sql = "Delete from alumnos where Nia=?";
 		int result = -1;
 		try (Connection conexion = MyDataSource.getConnection();
@@ -111,7 +111,7 @@ public class DaoSqlimpl implements Dao {
 	}
 
 	@Override
-	public int ModificoNombrePorNia(String nombre, int nia) {
+	public int modificarNombreAPartirDeNiaBD(String nombre, int nia) {
 		String sql = "Update alumnos set Nombre=? where Nia=?";
 		int result = -1;
 		try (Connection conexion = MyDataSource.getConnection();
@@ -129,7 +129,7 @@ public class DaoSqlimpl implements Dao {
 	}
 
 	@Override
-	public List<Alumno> muestroAlumnos() {
+	public List<Alumno> mostrarAlumnos() {
 	    List<Alumno> listaAlumnos = new ArrayList<>();
 	    // Ajustado: a.id_grupo y g.id
 	    String sql = "SELECT a.*, g.nombre AS nombre_grupo FROM alumnos a " +
@@ -188,9 +188,9 @@ public class DaoSqlimpl implements Dao {
 	
 
 	@Override
-	public void InsertoListaGrupos(List<Grupo> muestrolista) {
+	public void insertarListaGrupo(List<Grupo> muestrolista) {
 		for (Grupo g : muestrolista) {
-			insertoGrupo(g); // Realmente es una funcion para poder hacer el Json pero como solo se puede una
+			guardarGrupo(g); // Realmente es una funcion para poder hacer el Json pero como solo se puede una
 								// interfaz de Dao pues eso
 		}
 
@@ -240,7 +240,7 @@ public class DaoSqlimpl implements Dao {
 
 
 	@Override
-	public int añadoAlumnoAGrupo(int nia, int id) {
+	public int añadirAlumnoAGrupoPorNia(int nia, int id) {
 		String sql = "UPDATE alumnos SET id_grupo = ? WHERE Nia = ?"; // como un alumno solo puede tener un grupo he
 																		// cambiado la consulta también, claro
 		int resultado = -1;
@@ -257,5 +257,6 @@ public class DaoSqlimpl implements Dao {
 		}
 		return resultado;
 	}
+	
 
 }

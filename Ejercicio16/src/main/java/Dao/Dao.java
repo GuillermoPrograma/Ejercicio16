@@ -10,14 +10,14 @@ import Main.Grupo;
 public interface Dao {
 	
 	
-	int insertoAlumno(Alumno a); //GuardarAlumno
-	int insertoGrupo(Grupo g);
-	int añadoAlumnoAGrupo(int nia, int id);
-	int eliminoAlumnoPorApellido(String apellido);
-	int eliminoAlumnoPorNia(int nia);
-	int ModificoNombrePorNia(String nombre,int nia);//nombreAlumnoAPArtirDelNia
-	void InsertoListaGrupos(List <Grupo> muestrolista);
-	List<Alumno> muestroAlumnos();
+	int guardarAlumnoBd(Alumno a); //GuardarAlumno
+	int guardarGrupo(Grupo g);
+	int añadirAlumnoAGrupoPorNia(int nia, int id);
+	int eliminarAlumnoPorApellido(String apellido);
+	int eliminarAlumnoPorNia(int nia);
+	int modificarNombreAPartirDeNiaBD(String nombre,int nia);//nombreAlumnoAPArtirDelNia
+	void insertarListaGrupo(List <Grupo> muestrolista);
+	List<Alumno> mostrarAlumnos();
 	
 
 }

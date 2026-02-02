@@ -39,3 +39,10 @@ java.sql.SQLSyntaxErrorException: Unknown column 'a.FechaNacimiento' in 'field l
 	at Main.Menu.exportoAJson(Menu.java:235) [classes/:?]
 	at Main.Menu.init(Menu.java:42) [classes/:?]
 	at Main.App.main(App.java:6) [classes/:?]
+2026-02-02 20:31:29 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-02 20:31:29 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@797cf65c
+2026-02-02 20:31:29 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-02 20:31:30 INFO  DaoSqlimpl - Alumno con NIA=2 insertado correctamente
+2026-02-02 20:33:18 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-02 20:33:19 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-02 20:33:19 INFO  HikariDataSource - HikariPool-1 - Start completed.
