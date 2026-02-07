@@ -12,8 +12,10 @@ public interface InterfazGrafica {
 	 Alumno guardoAlumnoGrafica();
 	 Grupo guardoGrupoGrafica();
 	 int[] añadoAlumnoAGrupoGrafica();
-	 public void muestroAlumnosGrafica(List<Alumno> alumnos);
+	 public void muestroAlumnosGrafica(List<Alumno> alumnos, boolean resumido);
 	 String[] modificarAlumnoIdGrafica();
 	 int eliminarAlumnoPorNia();
 	 String eliminarAlumnoPorApellido();
+	 int muestroAlumnosAPArtirDeGrupoGrafica();
+	 int muestroAlumnoAPartirDeNia();
 }

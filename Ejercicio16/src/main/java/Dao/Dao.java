@@ -18,6 +18,8 @@ public interface Dao {
 	int modificarNombreAPartirDeNiaBD(String nombre,int nia);//nombreAlumnoAPArtirDelNia
 	void insertarListaGrupo(List <Grupo> muestrolista);
 	List<Alumno> mostrarAlumnos();
+	List<Alumno> mostrarAlumnosPorGrupo(int num);
+	List<Alumno> mostrarUnAlumnoNia(int num);
 	
 
 }

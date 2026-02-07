@@ -33,12 +33,18 @@ public class Controlador {
 				mostrarAlumnos();
 				break;
 			case 5:
-				modificarNombreAPartirDeNia();
+				mostrarAlumnosAPartirDeGrupo();
 				break;
 			case 6:
-				eliminarAlumnoPorNia();
+				mostrarAlumnoAPartirDeNia();
 				break;
 			case 7:
+				modificarNombreAPartirDeNia();
+				break;
+			case 8:
+				eliminarAlumnoPorNia();
+				break;
+			case 9:
 				eliminarAlumnoPorApellido();
 				break;
 			case 0:
@@ -75,6 +81,7 @@ public class Controlador {
 	}
 
 	public void aniadirAlumnoAGrupoPorNia() {
+		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),true);
 		int[] nia_grupo = ig.añadoAlumnoAGrupoGrafica();
 		int nia = nia_grupo[0];
 		int id = nia_grupo[1];
@@ -89,7 +96,12 @@ public class Controlador {
 	}
 
 	public void mostrarAlumnos() {
-		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos());
+		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),false); //no resumido
+	}
+
+	public void mostrarAlumnosAPartirDeGrupo() {
+		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),true);
+		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnosPorGrupo(ig.muestroAlumnosAPArtirDeGrupoGrafica()),false);//no resumido
 	}
 
 	public void modificarNombreAPartirDeNia() {
@@ -100,7 +112,7 @@ public class Controlador {
 	}
 
 	public void eliminarAlumnoPorNia() {
-		 int nia = ig.eliminarAlumnoPorNia();
+		int nia = ig.eliminarAlumnoPorNia();
 		if (nia == -1) {
 			ig.mostrarMensaje("Eliminacion cancelada");
 		} else {
@@ -115,24 +127,28 @@ public class Controlador {
 		}
 
 	}
+
 	public void eliminarAlumnoPorApellido() {
-	    String apellido = ig.eliminarAlumnoPorApellido();
+		String apellido = ig.eliminarAlumnoPorApellido();
 
-	    if (apellido == null) {
-	        ig.mostrarMensaje("Eliminación cancelada");
-	        return;
-	    }
+		if (apellido == null) {
+			ig.mostrarMensaje("Eliminación cancelada");
+			return;
+		}
 
-	    int result = daoSql.eliminarAlumnoPorApellido(apellido);
+		int result = daoSql.eliminarAlumnoPorApellido(apellido);
 
-	    if (result == -1) {
-	        ig.mostrarMensaje("Error de conexión");
-	    } else if (result == 0) {
-	        ig.mostrarMensaje("No hay alumnos con ese apellido");
-	    } else {
-	        ig.mostrarMensaje(result + " alumnos eliminados");
-	    }
+		if (result == -1) {
+			ig.mostrarMensaje("Error de conexión");
+		} else if (result == 0) {
+			ig.mostrarMensaje("No hay alumnos con ese apellido");
+		} else {
+			ig.mostrarMensaje(result + " alumnos eliminados");
+		}
 	}
-
+	public void mostrarAlumnoAPartirDeNia() 
+	{
+	ig.muestroAlumnosGrafica(daoSql.mostrarUnAlumnoNia(ig.muestroAlumnoAPartirDeNia()), false);
+	}
 
 }

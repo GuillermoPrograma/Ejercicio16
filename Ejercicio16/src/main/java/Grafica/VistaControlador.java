@@ -22,9 +22,11 @@ public class VistaControlador implements InterfazGrafica {
 		System.out.println("2. Insertar grupo");
 		System.out.println("3. Añadir alumno a grupo (Asignar)");
 		System.out.println("4. Mostrar todos los alumnos con su grupo");
-		System.out.println("5. Modificar nombre de alumno por Nia ");
-		System.out.println("6. Eliminar alumno por Nia");
-		System.out.println("7. Eliminar alumnos por apellido");
+		System.out.println("5. Mostrar alumnos de un grupo en especifico");
+		System.out.println("6. Mostrar alumno a partir de su Nia");
+		System.out.println("7. Modificar nombre de alumno por Nia ");
+		System.out.println("8. Eliminar alumno por Nia");
+		System.out.println("9. Eliminar alumnos por apellido");
 		System.out.println("0. Salir");
 		System.out.print("Seleccione una opción: ");
 		opcion = entrada.nextInt();
@@ -79,23 +81,42 @@ public class VistaControlador implements InterfazGrafica {
 		int nia = entrada.nextInt();
 		System.out.println("dime el id del grupo");
 		int id = entrada.nextInt();
-
+		entrada.nextLine();
 		int[] nia_Grupo = new int[2];
 		nia_Grupo[0] = nia;
 		nia_Grupo[1] = id;
 		return nia_Grupo;
 	}
 
-	public void muestroAlumnosGrafica(List<Alumno> alumnos) {
-		System.out.println("\nLISTADO DE TODOS LOS ALUMNOS");
-		System.out.println("------------------------------");
+	public void muestroAlumnosGrafica(List<Alumno> alumnos, boolean resumido) { // No se si estará bien pero un booleano
+		
 		if (alumnos.isEmpty()) {
 			System.out.println("No hay alumnos registrados.");
 		} else {
+
 			printCabeceraTablaAlumno();
-			alumnos.forEach(this::printAlumnos);
-			System.out.println();
+			if (resumido == false) {
+				System.out.println("\nLISTADO DE TODOS LOS ALUMNOS");
+				System.out.println("------------------------------");
+				alumnos.forEach(this::printAlumnos);
+				System.out.println();
+			} else {
+				for (Alumno a : alumnos) {
+					System.out.println("nombre alumno : " + a.getNombre());
+					System.out.println("primari key alumno : " + a.getNia());
+				}
+
+			}
+
 		}
+	}
+
+	public int muestroAlumnosAPArtirDeGrupoGrafica() {
+
+		System.out.println("Dime el id del grupo del que quieres buscar a los alumnos");
+		int num = entrada.nextInt();
+		entrada.nextLine();
+		return num;
 	}
 
 	private void printCabeceraTablaAlumno() {
@@ -151,6 +172,13 @@ public class VistaControlador implements InterfazGrafica {
 			return apellidos;
 		} else
 			return null;
+	}
+
+	@Override
+	public int muestroAlumnoAPartirDeNia() {
+		System.out.println("Dime el nia del alumno que quieres ver :");
+		int num = entrada.nextInt();
+		return num;
 	}
 
 }

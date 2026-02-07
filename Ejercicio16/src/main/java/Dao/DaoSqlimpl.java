@@ -22,41 +22,38 @@ import pool.MyDataSource;
 public class DaoSqlimpl implements Dao {
 
 	private static final Logger log = LoggerFactory.getLogger(DaoSqlimpl.class); // pruebo a hacer un log para todo sql
-	
-	
-	public DaoSqlimpl() {}
-	
 
+	public DaoSqlimpl() {
+	}
 
 	@Override
 	public int guardarAlumnoBd(Alumno al) {
-	    // Ajustado: fecha_nacimiento e id_grupo
-	    String sql = "INSERT INTO alumnos(nia, nombre, apellidos, genero, fecha_nacimiento, ciclo, curso, id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		// Ajustado: fecha_nacimiento e id_grupo
+		String sql = "INSERT INTO alumnos(nia, nombre, apellidos, genero, fecha_nacimiento, ciclo, curso, id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-	    try (Connection conexion = MyDataSource.getConnection();
-	         PreparedStatement pstm = conexion.prepareStatement(sql)) {
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement pstm = conexion.prepareStatement(sql)) {
 
-	        pstm.setInt(1, al.getNia());
-	        pstm.setString(2, al.getNombre());
-	        pstm.setString(3, al.getApellidos());
-	        pstm.setString(4, String.valueOf(al.getGenero()));
-	        pstm.setDate(5, Date.valueOf(al.getFecha()));
-	        pstm.setString(6, al.getCiclo());
-	        pstm.setString(7, al.getCurso());
-	        
-	        if (al.getGrupo() != null) {
-	            pstm.setInt(8, al.getGrupo().getId());
-	        } else {
-	            pstm.setNull(8, java.sql.Types.INTEGER);
-	        }
+			pstm.setInt(1, al.getNia());
+			pstm.setString(2, al.getNombre());
+			pstm.setString(3, al.getApellidos());
+			pstm.setString(4, String.valueOf(al.getGenero()));
+			pstm.setDate(5, Date.valueOf(al.getFecha()));
+			pstm.setString(6, al.getCiclo());
+			pstm.setString(7, al.getCurso());
 
-	        return pstm.executeUpdate();
-	    } catch (SQLException e) {
-	        log.error("Error al insertar alumno con NIA={}", al.getNia(), e);
-	        return -1;
-	    }
+			if (al.getGrupo() != null) {
+				pstm.setInt(8, al.getGrupo().getId());
+			} else {
+				pstm.setNull(8, java.sql.Types.INTEGER);
+			}
+
+			return pstm.executeUpdate();
+		} catch (SQLException e) {
+			log.error("Error al insertar alumno con NIA={}", al.getNia(), e);
+			return -1;
+		}
 	}
-
 
 	@Override
 	public int guardarGrupo(Grupo g) {
@@ -130,62 +127,52 @@ public class DaoSqlimpl implements Dao {
 
 	@Override
 	public List<Alumno> mostrarAlumnos() {
-	    List<Alumno> listaAlumnos = new ArrayList<>();
-	    // Ajustado: a.id_grupo y g.id
-	    String sql = "SELECT a.*, g.nombre AS nombre_grupo FROM alumnos a " +
-	                 "LEFT JOIN grupos g ON a.id_grupo = g.id";
+		List<Alumno> listaAlumnos = new ArrayList<>();
+		// Ajustado: a.id_grupo y g.id
+		String sql = "SELECT a.*, g.nombre AS nombre_grupo FROM alumnos a " + "LEFT JOIN grupos g ON a.id_grupo = g.id";
 
-	    try (Connection conexion = MyDataSource.getConnection();
-	         PreparedStatement pstm = conexion.prepareStatement(sql);
-	         ResultSet rs = pstm.executeQuery()) {
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement pstm = conexion.prepareStatement(sql);
+				ResultSet rs = pstm.executeQuery()) {
 
-	        while (rs.next()) {
-	            Alumno al = new Alumno(
-	                rs.getInt("nia"),
-	                rs.getString("nombre"),
-	                rs.getString("apellidos"),
-	                rs.getString("genero").charAt(0),
-	                rs.getDate("fecha_nacimiento").toLocalDate(), // Nombre exacto de la columna
-	                rs.getString("ciclo"),
-	                rs.getString("curso")
-	            );
+			while (rs.next()) {
+				Alumno al = new Alumno(rs.getInt("nia"), rs.getString("nombre"), rs.getString("apellidos"),
+						rs.getString("genero").charAt(0), rs.getDate("fecha_nacimiento").toLocalDate(), // Nombre exacto
+																										// de la columna
+						rs.getString("ciclo"), rs.getString("curso"));
 
-	            int idGrupo = rs.getInt("id_grupo");
-	            if (!rs.wasNull()) {
-	                Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
-	                al.agregarGrupo(grp);
-	            }
-	            listaAlumnos.add(al);
-	        }
-	    } catch (SQLException e) {
-	        log.error("Error al recuperar la lista de alumnos", e);
-	    }
-	    return listaAlumnos;
-	}
-	
-	
-	public Map<Integer, String> muestroNiayNombres()
-	{
-		Map<Integer, String> listaAlumnos = new HashMap<>();
-		    
-		    String sql = "SELECT nia, nombre from alumnos";
-
-		    try (Connection conexion = MyDataSource.getConnection();
-		         PreparedStatement pstm = conexion.prepareStatement(sql);
-		         ResultSet rs = pstm.executeQuery()) {
-
-		        while (rs.next()) {
-		           
-		              listaAlumnos.put(rs.getInt("nia"), rs.getString("nombre"));
-		            }
-		           
-		      
-		    } catch (SQLException e) {
-		        log.error("Error al recuperar la lista de alumnos", e);
-		    }
-		   return listaAlumnos; //Esta es mi alternativa, no sé si hay alguna mejor 
+				int idGrupo = rs.getInt("id_grupo");
+				if (!rs.wasNull()) {
+					Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
+					al.agregarGrupo(grp);
+				}
+				listaAlumnos.add(al);
+			}
+		} catch (SQLException e) {
+			log.error("Error al recuperar la lista de alumnos", e);
 		}
-	
+		return listaAlumnos;
+	}
+
+	public Map<Integer, String> muestroNiayNombres() {
+		Map<Integer, String> listaAlumnos = new HashMap<>();
+
+		String sql = "SELECT nia, nombre from alumnos";
+
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement pstm = conexion.prepareStatement(sql);
+				ResultSet rs = pstm.executeQuery()) {
+
+			while (rs.next()) {
+
+				listaAlumnos.put(rs.getInt("nia"), rs.getString("nombre"));
+			}
+
+		} catch (SQLException e) {
+			log.error("Error al recuperar la lista de alumnos", e);
+		}
+		return listaAlumnos; // Esta es mi alternativa, no sé si hay alguna mejor
+	}
 
 	@Override
 	public void insertarListaGrupo(List<Grupo> muestrolista) {
@@ -195,49 +182,44 @@ public class DaoSqlimpl implements Dao {
 		}
 
 	}
+
 	public List<Grupo> obtenerGruposConAlumnos() {
-	    Map<Integer, Grupo> mapaGrupos = new HashMap<>();
+		Map<Integer, Grupo> mapaGrupos = new HashMap<>();
 
-	    		String sql = "SELECT g.id AS grupo_id, g.nombre AS grupo_nombre, a.Nia, a.Nombre, a.Apellidos, a.Genero, a.FechaNacimiento, a.Ciclo, a.Curso " + "FROM grupos g LEFT JOIN alumnos a ON g.id = a.id_grupo ORDER BY g.id";
+		String sql = "SELECT g.id AS grupo_id, g.nombre AS grupo_nombre, a.Nia, a.Nombre, a.Apellidos, a.Genero, a.FechaNacimiento, a.Ciclo, a.Curso "
+				+ "FROM grupos g LEFT JOIN alumnos a ON g.id = a.id_grupo ORDER BY g.id";
 
-	    try (Connection con = MyDataSource.getConnection();
-	         PreparedStatement ps = con.prepareStatement(sql);
-	         ResultSet rs = ps.executeQuery()) {
+		try (Connection con = MyDataSource.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
 
-	        while (rs.next()) {
-	            int idGrupo = rs.getInt("grupo_id");
+			while (rs.next()) {
+				int idGrupo = rs.getInt("grupo_id");
 
-	            // Si el grupo aún no está en el mapa, lo creamos
-	            Grupo grupo = mapaGrupos.get(idGrupo);
-	            if (grupo == null) {
-	                grupo = new Grupo(idGrupo, rs.getString("grupo_nombre"));
-	                mapaGrupos.put(idGrupo, grupo);
-	            }
+				// Si el grupo aún no está en el mapa, lo creamos
+				Grupo grupo = mapaGrupos.get(idGrupo);
+				if (grupo == null) {
+					grupo = new Grupo(idGrupo, rs.getString("grupo_nombre"));
+					mapaGrupos.put(idGrupo, grupo);
+				}
 
-	            // Si hay alumno (puede ser null por el LEFT JOIN)
-	            int nia = rs.getInt("Nia");
-	            if (!rs.wasNull()) {
-	                Alumno al = new Alumno(
-	                    nia,
-	                    rs.getString("Nombre"),
-	                    rs.getString("Apellidos"),
-	                    rs.getString("Genero").charAt(0),
-	                    rs.getDate("FechaNacimiento").toLocalDate(),
-	                    rs.getString("Ciclo"),
-	                    rs.getString("Curso")
-	                );
+				// Si hay alumno (puede ser null por el LEFT JOIN)
+				int nia = rs.getInt("Nia");
+				if (!rs.wasNull()) {
+					Alumno al = new Alumno(nia, rs.getString("Nombre"), rs.getString("Apellidos"),
+							rs.getString("Genero").charAt(0), rs.getDate("FechaNacimiento").toLocalDate(),
+							rs.getString("Ciclo"), rs.getString("Curso"));
 
-	                grupo.getAlumnos().add(al);
-	            }
-	        }
+					grupo.getAlumnos().add(al);
+				}
+			}
 
-	    } catch (SQLException e) {
-	        log.error("Error obteniendo grupos con alumnos", e);
-	    }
+		} catch (SQLException e) {
+			log.error("Error obteniendo grupos con alumnos", e);
+		}
 
-	    return new ArrayList<>(mapaGrupos.values());
+		return new ArrayList<>(mapaGrupos.values());
 	}
-
 
 	@Override
 	public int añadirAlumnoAGrupoPorNia(int nia, int id) {
@@ -257,6 +239,81 @@ public class DaoSqlimpl implements Dao {
 		}
 		return resultado;
 	}
-	
+
+	@Override
+	public List<Alumno> mostrarAlumnosPorGrupo(int num) {
+
+		List<Alumno> listaAlumnos = new ArrayList<>();
+
+		String sql = "SELECT a.*, g.nombre AS nombre_grupo " + "FROM alumnos a "
+				+ "INNER JOIN grupos g ON a.id_grupo = g.id " + "WHERE a.id_grupo = ?";
+
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement pstm = conexion.prepareStatement(sql);) {
+			pstm.setInt(1, num);
+			try (ResultSet rs = pstm.executeQuery()) {
+				while (rs.next()) {
+					Alumno al = new Alumno(rs.getInt("nia"), rs.getString("nombre"), rs.getString("apellidos"),
+							rs.getString("genero").charAt(0), rs.getDate("fecha_nacimiento").toLocalDate(), // Nombre
+																											// exacto
+																											// de la
+																											// columna
+							rs.getString("ciclo"), rs.getString("curso"));
+
+					int idGrupo = rs.getInt("id_grupo");
+					if (!rs.wasNull()) {
+						Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
+						al.agregarGrupo(grp);
+					}
+					listaAlumnos.add(al);
+				}
+			} catch (SQLException e) {
+				log.error("Error al recuperar la lista de alumnos", e);
+				return null;
+			}
+			return listaAlumnos;
+		} catch (SQLException e1) {
+			log.error("Error al recuperar la lista de alumnos", e1);
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<Alumno> mostrarUnAlumnoNia(int num) {
+
+		List<Alumno> listaAlumnos = new ArrayList<>(); // aunque solo sea un alumno lo meto en una lista y reutilizo
+														// codigo en la interfaz
+
+		String sql = "SELECT a.*, g.nombre AS nombre_grupo FROM alumnos a "
+				+ "LEFT JOIN grupos g ON a.id_grupo = g.id WHERE a.nia = ?";
+
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement pstm = conexion.prepareStatement(sql);) {
+			pstm.setInt(1, num);
+			try (ResultSet rs = pstm.executeQuery()) {
+				while (rs.next()) {
+					Alumno al = new Alumno(rs.getInt("nia"), rs.getString("nombre"), rs.getString("apellidos"),
+							rs.getString("genero").charAt(0), rs.getDate("fecha_nacimiento").toLocalDate(),
+							rs.getString("ciclo"), rs.getString("curso"));
+
+					int idGrupo = rs.getInt("id_grupo");
+					if (!rs.wasNull()) {
+						Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
+						al.agregarGrupo(grp);
+					}
+					listaAlumnos.add(al);
+				}
+			} catch (SQLException e) {
+				log.error("Error al recuperar la lista de alumnos", e);
+				return null;
+			}
+			return listaAlumnos;
+		} catch (SQLException e1) {
+			log.error("Error al recuperar la lista de alumnos", e1);
+			return null;
+		}
+
+	}
 
 }

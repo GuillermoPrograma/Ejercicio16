@@ -26,7 +26,7 @@ public class Alumno implements Serializable {
 		this.fecha = fecha_Nac;
 		this.nia = nia;
 		this.nombre = nombre;
-
+		this.genero = genero;
 		this.apellidos = apellidos;
 		this.ciclo = ciclo;
 		this.curso = curso;

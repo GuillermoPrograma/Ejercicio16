@@ -46,3 +46,92 @@ java.sql.SQLSyntaxErrorException: Unknown column 'a.FechaNacimiento' in 'field l
 2026-02-02 20:33:18 INFO  HikariDataSource - HikariPool-1 - Starting...
 2026-02-02 20:33:19 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
 2026-02-02 20:33:19 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 11:34:53 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 11:34:53 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 11:34:53 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 11:35:37 ERROR DaoSqlimpl - Error al insertar alumno con NIA=1
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'alumnos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.guardarAlumnoBd(DaoSqlimpl.java:51) [classes/:?]
+	at Controlador.Controlador.guardoAlumno(Controlador.java:59) [classes/:?]
+	at Controlador.Controlador.Init(Controlador.java:24) [classes/:?]
+	at Main.App.main(App.java:15) [classes/:?]
+2026-02-07 11:38:59 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 11:38:59 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2250b9f2
+2026-02-07 11:38:59 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 11:39:10 INFO  DaoSqlimpl - Alumno con NIA=3 insertado correctamente en el grupo con Id=1
+2026-02-07 11:45:59 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 11:46:00 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@797cf65c
+2026-02-07 11:46:00 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 11:46:00 ERROR DaoSqlimpl - Error al insertar grupo con Id=2
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2' for key 'grupos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.guardarGrupo(DaoSqlimpl.java:67) [classes/:?]
+	at Controlador.Controlador.guardoGrupo(Controlador.java:70) [classes/:?]
+	at Controlador.Controlador.Init(Controlador.java:27) [classes/:?]
+	at Main.App.main(App.java:15) [classes/:?]
+2026-02-07 11:46:11 INFO  DaoSqlimpl - Alumno con NIA=3 insertado correctamente
+2026-02-07 11:46:43 INFO  DaoSqlimpl - Alumno con NIA=3 insertado correctamente en el grupo con Id=3
+2026-02-07 11:52:54 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 11:52:54 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2250b9f2
+2026-02-07 11:52:54 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 12:15:21 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 12:15:22 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2250b9f2
+2026-02-07 12:15:22 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 12:17:46 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 12:17:47 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 12:17:47 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 12:17:47 INFO  DaoSqlimpl - Alumno con NIA=1 insertado correctamente en el grupo con Id=3
+2026-02-07 12:58:43 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 12:58:44 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 12:58:44 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 12:58:57 INFO  DaoSqlimpl - Alumno con NIA=3 insertado correctamente en el grupo con Id=2
+2026-02-07 13:22:03 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 13:22:04 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 13:22:04 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 13:22:04 ERROR DaoSqlimpl - Error al recuperar la lista de alumnos
+java.sql.SQLSyntaxErrorException: Table 'modelo15.alumno' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:968) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.mostrarUnAlumnoNia(DaoSqlimpl.java:293) [classes/:?]
+	at Controlador.Controlador.mostrarAlumnoAPartirDeNia(Controlador.java:151) [classes/:?]
+	at Controlador.Controlador.Init(Controlador.java:39) [classes/:?]
+	at Main.App.main(App.java:15) [classes/:?]
+2026-02-07 13:24:07 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 13:24:08 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 13:24:08 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 13:24:08 ERROR DaoSqlimpl - Error al recuperar la lista de alumnos
+java.sql.SQLSyntaxErrorException: Unknown table 'a'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:968) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.mostrarUnAlumnoNia(DaoSqlimpl.java:294) [classes/:?]
+	at Controlador.Controlador.mostrarAlumnoAPartirDeNia(Controlador.java:151) [classes/:?]
+	at Controlador.Controlador.Init(Controlador.java:39) [classes/:?]
+	at Main.App.main(App.java:15) [classes/:?]
+2026-02-07 13:26:30 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 13:26:30 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
+2026-02-07 13:26:30 INFO  HikariDataSource - HikariPool-1 - Start completed.
