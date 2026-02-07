@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <File name="LogFile" fileName="logs/app.log" append="true">
+        <File name="ArchivoLog" fileName="logs/app.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
         </File>
     </Appenders>
 
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="LogFile"/>
+            <AppenderRef ref="ArchivoLog"/>
         </Root>
-        
-        <Logger name="Dao.DaoSqlimpl" level="debug" additivity="false">
-            <AppenderRef ref="LogFile"/>
-        </Logger>
-
-        <Logger name="pool.MyDataSource" level="debug" additivity="false">
-            <AppenderRef ref="LogFile"/>
-        </Logger>
     </Loggers>
 </Configuration>

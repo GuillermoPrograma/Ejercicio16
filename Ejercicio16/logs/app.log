@@ -135,3 +135,21 @@ java.sql.SQLSyntaxErrorException: Unknown table 'a'
 2026-02-07 13:26:30 INFO  HikariDataSource - HikariPool-1 - Starting...
 2026-02-07 13:26:30 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31bcf236
 2026-02-07 13:26:30 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 20:18:09 INFO  HikariDataSource - HikariPool-1 - Starting...
+2026-02-07 20:18:10 INFO  HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@331acdad
+2026-02-07 20:18:10 INFO  HikariDataSource - HikariPool-1 - Start completed.
+2026-02-07 20:18:10 ERROR DaoSqlimpl - Error al insertar alumno con NIA=1
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'alumnos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:?]
+	at Dao.DaoSqlimpl.guardarAlumnoBd(DaoSqlimpl.java:51) [classes/:?]
+	at Controlador.Controlador.guardoAlumno(Controlador.java:62) [classes/:?]
+	at Controlador.Controlador.Init(Controlador.java:24) [classes/:?]
+	at Main.App.main(App.java:15) [classes/:?]
