@@ -15,8 +15,8 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import Main.Alumno;
-import Main.Grupo;
+import Model.Alumno;
+import Model.Grupo;
 import pool.MyDataSource;
 
 public class DaoSqlimpl implements Dao {
@@ -144,7 +144,7 @@ public class DaoSqlimpl implements Dao {
 				int idGrupo = rs.getInt("id_grupo");
 				if (!rs.wasNull()) {
 					Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
-					al.agregarGrupo(grp);
+					al.setGrupo(grp);
 				}
 				listaAlumnos.add(al);
 			}
@@ -263,7 +263,7 @@ public class DaoSqlimpl implements Dao {
 					int idGrupo = rs.getInt("id_grupo");
 					if (!rs.wasNull()) {
 						Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
-						al.agregarGrupo(grp);
+						al.setGrupo(grp);
 					}
 					listaAlumnos.add(al);
 				}
@@ -300,7 +300,7 @@ public class DaoSqlimpl implements Dao {
 					int idGrupo = rs.getInt("id_grupo");
 					if (!rs.wasNull()) {
 						Grupo grp = new Grupo(idGrupo, rs.getString("nombre_grupo"));
-						al.agregarGrupo(grp);
+						al.setGrupo(grp);
 					}
 					listaAlumnos.add(al);
 				}

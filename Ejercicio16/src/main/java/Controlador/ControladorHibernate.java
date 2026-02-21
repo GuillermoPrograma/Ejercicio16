@@ -3,12 +3,12 @@ package Controlador;
 import Dao.Dao;
 import Grafica.InterfazGrafica;
 
-public class Controlador {
-	private Dao daoSql;
+public class ControladorHibernate {
+	private Dao daoHibernate;
 	private InterfazGrafica ig;
 
-	public Controlador(Dao daoSql, InterfazGrafica ig) {
-		this.daoSql = daoSql;
+	public ControladorHibernate(Dao daoHibernate, InterfazGrafica ig) {
+		this.daoHibernate = daoHibernate;
 
 		this.ig = ig;
 	}
@@ -59,7 +59,7 @@ public class Controlador {
 	}
 
 	public void guardoAlumno() {
-		int result = daoSql.guardarAlumnoBd(ig.guardoAlumnoGrafica());
+		int result = daoHibernate.guardarAlumnoBd(ig.guardoAlumnoGrafica());
 		if (result == -1) {
 			ig.mostrarMensaje("Error de conexion");
 		} else if (result == 0) {
@@ -70,7 +70,7 @@ public class Controlador {
 	}
 
 	public void guardoGrupo() {
-		int result = daoSql.guardarGrupo(ig.guardoGrupoGrafica());
+		int result = daoHibernate.guardarGrupo(ig.guardoGrupoGrafica());
 		if (result == -1) {
 			ig.mostrarMensaje("Error de conexion");
 		} else if (result == 0) {
@@ -81,11 +81,11 @@ public class Controlador {
 	}
 
 	public void aniadirAlumnoAGrupoPorNia() {
-		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),true);
+		ig.muestroAlumnosGrafica(daoHibernate.mostrarAlumnos(),true);
 		int[] nia_grupo = ig.añadoAlumnoAGrupoGrafica();
 		int nia = nia_grupo[0];
 		int id = nia_grupo[1];
-		int result = daoSql.añadirAlumnoAGrupoPorNia(nia, id);
+		int result = daoHibernate.añadirAlumnoAGrupoPorNia(nia, id);
 		if (result == -1) {
 			ig.mostrarMensaje("Error de conexion");
 		} else if (result == 0) {
@@ -96,19 +96,19 @@ public class Controlador {
 	}
 
 	public void mostrarAlumnos() {
-		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),false); //no resumido
+		ig.muestroAlumnosGrafica(daoHibernate.mostrarAlumnos(),false); //no resumido
 	}
 
 	public void mostrarAlumnosAPartirDeGrupo() {
-		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnos(),true);
-		ig.muestroAlumnosGrafica(daoSql.mostrarAlumnosPorGrupo(ig.muestroAlumnosAPArtirDeGrupoGrafica()),false);//no resumido
+		ig.muestroAlumnosGrafica(daoHibernate.mostrarAlumnos(),true);
+		ig.muestroAlumnosGrafica(daoHibernate.mostrarAlumnosPorGrupo(ig.muestroAlumnosAPArtirDeGrupoGrafica()),false);//no resumido
 	}
 
 	public void modificarNombreAPartirDeNia() {
 		String[] nombre_nia = ig.modificarAlumnoIdGrafica();
 		int nia = Integer.parseInt(nombre_nia[0]); // me he asegurado de que vaya a salir bien en la vistaControlador
 		String nombre = nombre_nia[1];
-		daoSql.modificarNombreAPartirDeNiaBD(nombre, nia);
+		daoHibernate.modificarNombreAPartirDeNiaBD(nombre, nia);
 	}
 
 	public void eliminarAlumnoPorNia() {
@@ -116,7 +116,7 @@ public class Controlador {
 		if (nia == -1) {
 			ig.mostrarMensaje("Eliminacion cancelada");
 		} else {
-			int result = daoSql.eliminarAlumnoPorNia(nia);
+			int result = daoHibernate.eliminarAlumnoPorNia(nia);
 			if (result == -1) {
 				ig.mostrarMensaje("Error de conexion");
 			} else if (result == 0) {
@@ -136,7 +136,7 @@ public class Controlador {
 			return;
 		}
 
-		int result = daoSql.eliminarAlumnoPorApellido(apellido);
+		int result = daoHibernate.eliminarAlumnoPorApellido(apellido);
 
 		if (result == -1) {
 			ig.mostrarMensaje("Error de conexión");
@@ -148,7 +148,7 @@ public class Controlador {
 	}
 	public void mostrarAlumnoAPartirDeNia() 
 	{
-	ig.muestroAlumnosGrafica(daoSql.mostrarUnAlumnoNia(ig.muestroAlumnoAPartirDeNia()), false);
+	ig.muestroAlumnosGrafica(daoHibernate.mostrarUnAlumnoNia(ig.muestroAlumnoAPartirDeNia()), false);
 	}
 
 }

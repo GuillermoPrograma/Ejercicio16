@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
-import Main.Alumno;
-import Main.Grupo;
+
+import Model.Alumno;
+import Model.Grupo;
 
 public class VistaControlador implements InterfazGrafica {
 

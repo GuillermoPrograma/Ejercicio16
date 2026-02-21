@@ -2,8 +2,8 @@ package Dao;
 
 import java.util.List;
 
-import Main.Alumno;
-import Main.Grupo;
+import Model.Alumno;
+import Model.Grupo;
 
 
 
@@ -17,7 +17,7 @@ public interface Dao {
 	int eliminarAlumnoPorNia(int nia);
 	int modificarNombreAPartirDeNiaBD(String nombre,int nia);//nombreAlumnoAPArtirDelNia
 	void insertarListaGrupo(List <Grupo> muestrolista);
-	List<Alumno> mostrarAlumnos();
+	List<Alumno> mostrarAlumnos(); 
 	List<Alumno> mostrarAlumnosPorGrupo(int num);
 	List<Alumno> mostrarUnAlumnoNia(int num);
 	

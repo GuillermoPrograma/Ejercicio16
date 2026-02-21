@@ -2,8 +2,8 @@ package Grafica;
 
 import java.util.List;
 
-import Main.Alumno;
-import Main.Grupo;
+import Model.Alumno;
+import Model.Grupo;
 
 public interface InterfazGrafica {
 	int mostrarMenu(); 
